@@ -1,0 +1,23 @@
+{% extends 'myshop/_base.html' %}
+
+
+{% block content %}
+    <h1>Checkout</h1>
+
+    <hr>
+    <ul>
+        {% for item in cart %}
+            <li>
+                {{item.product.name}} - {{item.quantity}}x
+                <span>{{item.total_price}}</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <hr>
+
+    <form method="POST">
+        {{form.as_p}}
+        <input type="submit" value="Order now">
+        {% csrf_token %}
+    </form>
+{% endblock content %}

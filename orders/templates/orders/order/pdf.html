@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>
+        <h1 class="name">MyShop</h1>
+        Invoice no {{order.id}} <br>
+        <span><small>{{order.created|date:"M d Y"}}</small></span>
+    </p>
+    <h3>Bill to</h3>
+    <p>
+        {{order.first_name}} {{order.last_name}}
+        <br> {{order.email}} <br> {{order.address}} <br> {{order.postal_code}} <br>
+    </p>
+    <h3>Item bought</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{item.product.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.get_cost}}</td>
+            </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+    <span>
+        {% if order.paid %}
+            Paid
+        {% else %}
+            Pending peyment
+        {% endif %}
+    </span>
+</body>
+
+</html>
+<!-- <html>
+
+
+<body>
+    <h1>my shop</h1>
+    <p>
+        Invoice no{{order.id}} <br>
+        <span><small>{{order.created|date:"M d Y"}}</small></span>
+    </p>
+    <h3>Bill to</h3>
+    <p>
+        {{order.first_name}} {{order.last_name}} <br> {{order.email}} <br> {{order.address}} <br> </p>
+
+    <h3>items bought</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{item.product.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.get_cost}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <span>
+        {% if order.paid %}
+            Paid
+        {% else %}
+            Panding payment
+        {% endif %}
+    </span>
+</body>
+
+</html> -->

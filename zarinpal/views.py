@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from orders.models import Order
+from .tasks import payment_completed
 
 
 from django.http import HttpResponse
@@ -34,6 +35,7 @@ def verify(request):
         if result.Status == 100:
             order.paid = True
             order.save()
+            payment_completed.delay(order.id)
             return render(request, "zarinpal/success.html", {"id":result.RefID}) 
         elif result.Status == 101:
             # return HttpResponse('Transaction submited\n' + str(result.Status))

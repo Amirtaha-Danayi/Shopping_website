@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'flower',
     'zarinpal.apps.ZarinpalConfig',
+    'coupons.apps.CouponsConfig',
 ]
 
 
